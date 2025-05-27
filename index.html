@@ -34,7 +34,6 @@
     }
 
     .container {
-      
       max-width: 700px;
       background: rgb(255, 254, 253);
       width: 290px;
@@ -47,6 +46,7 @@
     h1 {
       text-align: center;
       color: #6a1b9a;
+      font-size: 1.5rem;
     }
 
     .question {
@@ -222,6 +222,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+    // Delay function
+    function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // Show next question with delay
+    async function showNextQuestionWithDelay() {
+    await delay(600); // 600ms delay before transitioning
+    showNextQuestion();
+    }
+
   // ========== Popup Utility ==========
 
   function showPopup(message, buttons, callback) {
@@ -260,10 +271,10 @@ document.addEventListener('DOMContentLoaded', () => {
     popup.style.position = 'fixed';
     popup.style.top = '50%';
     popup.style.left = '50%';
-    popup.style.width = '310px';
+    popup.style.width = '290px';
     popup.style.transform = 'translate(-50%, -50%)';
     popup.style.background = '#fff';
-    popup.style.padding = '2rem';
+    popup.style.padding = '1rem';
     popup.style.border = '3px solid #f9a825';
     popup.style.borderRadius = '12px';
     popup.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
@@ -331,10 +342,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (name === 'cats' && value === 'no') {
         showPopupWithImage("Really? I'm Reporting this to the Cat Council!", ["Report Yourself", "Go Back"], (res) => {
-          if (res === 'Go Back') {
+          if (res === 'Report Yourself') {
+            window.open("https://youtu.be/ZN_XrB_St-8?si=OKPadVrfDFNl3XQE&t=24", '_blank');
+          } else {
             document.querySelector('input[name="cats"][value="yes"]').checked = true;
           }
-          showNextQuestion();
+          showNextQuestionWithDelay();
         }, 'cat_council.png');
         return;
       }
@@ -346,18 +359,18 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         } else {
             // If she says yes, show q2a → q2b → q2c, then continue to q3
-            showNextQuestion(); // q2a
+            showNextQuestionWithDelay();
             return;
         }
     }
-      showNextQuestion();
+      showNextQuestionWithDelay();
     });
   });
 
   // ========== Next Button and Final Submit ==========
 
-  document.getElementById('monthNext')?.addEventListener('click', () => {
-    showNextQuestion();
+  document.getElementById('monthNext').addEventListener('click', async () => {
+    showNextQuestionWithDelay();
   });
 
   document.getElementById('dateForm')?.addEventListener('submit', function(e) {
