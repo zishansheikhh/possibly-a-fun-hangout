@@ -1,581 +1,592 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>A Totally Scientific Survey - No Strings Attached</title>
-  <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-</script>
-  <script>
-    (function() {
-        emailjs.init("x3PA0gDR68jqAzf2h");  
-    })();
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>A Totally Scientific Survey - No Strings Attached</title>
+    <script type="text/javascript"
+          src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
   </script>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: url("sky.png") no-repeat center center fixed;
-      background-size: cover;
-      backdrop-filter: blur(2px);
-      color: #333;
-      height: 100vh;
-      width: 100%;
-      margin: auto;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    <script>
+      (function() {
+          emailjs.init("x3PA0gDR68jqAzf2h");  
+      })();
+    </script>
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        background: url("sky.png") no-repeat center center fixed;
+        background-size: cover;
+        backdrop-filter: blur(2px);
+        color: #333;
+        height: 100vh;
+        width: 100%;
+        margin: auto;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-    body.popup-active .container {
-      filter: blur(4px);
-      pointer-events: none;
-    }
+      body.popup-active .container {
+        filter: blur(4px);
+        pointer-events: none;
+      }
 
-    .container {
-      position: relative;
-      max-width: 700px;
-      background: rgb(255, 254, 253);
-      width: 290px;
-      padding: 1.2rem;
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-      position: relative;
-    }
+      .container {
+        position: relative;
+        max-width: 700px;
+        background: rgb(255, 254, 253);
+        width: 290px;
+        padding: 1.2rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
 
-    h1 {
-      text-align: center;
-      color: #6a1b9a;
-      font-size: 1.5rem;
-    }
+      h1 {
+        text-align: center;
+        color: #6a1b9a;
+        font-size: 1.5rem;
+      }
 
-    .question {
-      display: none;
-      opacity: 0;
-      transform: scale(0.95);
-      transition: all 0.4s ease-in-out;
-    }
+      .question {
+        display: none;
+        opacity: 0;
+        transform: scale(0.95);
+        transition: all 0.4s ease-in-out;
+      }
 
-    .question.active {
-      display: block;
-      opacity: 1;
-      transform: scale(1);
-    }
+      .question.active {
+        display: block;
+        opacity: 1;
+        transform: scale(1);
+      }
 
 
-    label {
-      display: block;
-      margin: 0.5rem 0;
-      cursor: pointer;
-    }
+      label {
+        display: block;
+        margin: 0.5rem 0;
+        cursor: pointer;
+      }
 
-    select, input[type="date"], input[type="email"], input[type="tel"]  {
-      margin-top: 0.5rem;
-      padding: 0.4rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
+      select, input[type="date"], input[type="email"], input[type="tel"]  {
+        margin-top: 0.5rem;
+        padding: 0.4rem;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
 
-    .end-message {
-      display: none;
-      padding: 2rem;
-      background: #fff3e0;
-      border-left: 5px solid #43a047;
-      border-radius: 12px;
-      font-size: 1.2rem;
-      text-align: center;
-      color: #2e7d32;
-    }
+      .end-message {
+        display: none;
+        padding: 2rem;
+        background: #fff3e0;
+        border-left: 5px solid #43a047;
+        border-radius: 12px;
+        font-size: 1.2rem;
+        text-align: center;
+        color: #2e7d32;
+      }
 
-    button {
-      margin-top: 1rem;
-      background-color: #6a1b9a;
-      color: white;
-      border: none;
-      padding: 0.6rem 1.4rem;
-      font-size: 0.8rem;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+      button {
+        margin-top: 1rem;
+        background-color: #6a1b9a;
+        color: white;
+        border: none;
+        padding: 0.6rem 1.4rem;
+        font-size: 0.8rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
 
-    button:hover {
-      background-color: #8e24aa;
-    }
+      button:hover {
+        background-color: #8e24aa;
+      }
 
-    .nav-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 1rem;
-    }
+      .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+      }
 
-    .prev {
-     padding: 0.2rem 0.8rem !important;
-     left: 0 !important;
-     position: absolute !important;
-     top: -155px !important;
-     background-color: #bcbcbc !important;
-    }
+      .prev {
+      padding: 0.2rem 0.8rem !important;
+      left: 0 !important;
+      position: absolute !important;
+      top: -135px !important;
+      background-color: #bcbcbc !important;
+      }
 
-    .fun-fact {
-      font-size: 0.8rem;
-      color: #555;
-      margin-top: 0.5rem;
-    }
+      .fun-fact {
+        font-size: 0.8rem;
+        color: #555;
+        margin-top: 0.5rem;
+      }
 
-    .popup-image {
-      width: 100%;
-      border-radius: 12px;
-      margin-top: 1rem;
-    }
-  </style>
-</head>
-<body>
-<div class="container">
-  <h1>A Totally Scientific Survey - No Strings Attached</h1>
-  <form id="dateForm">
-    <div class="question active" id="birthdayQ">
-      <p>Your Birthday:</p>
-      <input type="date" id="birthdayInput" name="birthday" style="padding: 0.5rem; border-radius: 6px; width: 100%;"/>
-      <p id="funFact" style="font-size: 0.75rem; color: #6a1b9a; margin-top: 0.5rem;"></p>
-      <button type="button" id="confirmBirthdayBtn">Confirm Birthday</button>
-    </div>
-
-    <div class="question" id="q1">
-      <p>1. Do you like cats?</p>
-      <label><input type="radio" name="cats" value="yes"> Yes</label>
-      <label><input type="radio" name="cats" value="no"> No</label>
-       <div class="nav-buttons">
-        <button type="button" class="backBtn prev" id="prevBtn">く</button>
-        <button type="button" class="nextBtn" id="nextBtn">Next</button>
+      .popup-image {
+        width: 100%;
+        border-radius: 12px;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+  <div class="container">
+    <h1>A Totally Scientific Survey - No Strings Attached</h1>
+    <form id="dateForm">
+      <div class="question active" id="birthdayQ">
+        <p>Your Birthday:</p>
+        <input type="date" id="birthdayInput" name="birthday" style="padding: 0.5rem; border-radius: 6px; width: 70%;"/>
+        <p id="funFact" style="font-size: 0.75rem; color: #6a1b9a; margin-top: 0.5rem;"></p>
+        <button type="button" id="confirmBirthdayBtn">Confirm Birthday</button>
       </div>
-    </div>
 
-    <div class="question" id="q2"> 
-        <p>2. Would you like to spend time with a cat person?</p>
-        <label><input type="radio" name="cat_person" value="yes"> Yes</label>
-        <label><input type="radio" name="cat_person" value="no"> No</label> 
+      <div class="question" id="q1">
+        <p>1. Do you like cats?</p>
+        <label><input type="radio" name="cats" value="yes"> Yes</label>
+        <label><input type="radio" name="cats" value="no"> No</label>
         <div class="nav-buttons">
           <button type="button" class="backBtn prev" id="prevBtn">く</button>
           <button type="button" class="nextBtn" id="nextBtn">Next</button>
+        </div>
       </div>
-    </div>
 
-    <div class="question" id="q2a">
-        <p>3. What's your ideal kind of hangout?</p>
-        <label><input type="radio" name="date_type" value="Coffee & Chat"> Coffee/Chat & Baatcheet</label>
-        <label><input type="radio" name="date_type" value="Long Walks"> Long Walks</label>
-        <label><input type="radio" name="date_type" value="Movie & Chill"> Street Food Hunt</label>
-        <label><input type="radio" name="date_type" value="Adventure Surprise"> All of the above</label>
+      <div class="question" id="q2"> 
+          <p>2. Would you like to spend time with a cat person?</p>
+          <label><input type="radio" name="cat_person" value="yes"> Yes</label>
+          <label><input type="radio" name="cat_person" value="no"> No</label> 
+          <div class="nav-buttons">
+            <button type="button" class="backBtn prev" id="prevBtn">く</button>
+            <button type="button" class="nextBtn" id="nextBtn">Next</button>
+        </div>
+      </div>
+
+      <div class="question" id="q2a">
+          <p>3. What's your ideal kind of hangout?</p>
+          <label><input type="radio" name="date_type" value="Coffee & Chat"> Coffee/Chat & Baatcheet</label>
+          <label><input type="radio" name="date_type" value="Long Walks"> Long Walks</label>
+          <label><input type="radio" name="date_type" value="Movie & Chill"> Street Food Hunt</label>
+          <label><input type="radio" name="date_type" value="Adventure Surprise"> All of the above</label>
+          <div class="nav-buttons">
+            <button type="button" class="backBtn prev" id="prevBtn">く</button>
+            <button type="button" class="nextBtn" id="nextBtn">Next</button>
+        </div>
+      </div>
+
+      <div class="question" id="q2b">
+          <p>4. How long do you like hanging out on first meets?</p>
+          <label><input type="radio" name="duration" value="Quick 30 mins"> Quick 30 mins</label>
+          <label><input type="radio" name="duration" value="1-2 hours"> 1–2 hours</label>
+          <label><input type="radio" name="duration" value="3+ hours"> 3+ hours</label>
+          <label><input type="radio" name="duration" value="Until they kick us out"> Until they kick us out</label>
+          <div class="nav-buttons">
+            <button type="button" class="backBtn prev" id="prevBtn">く</button>
+            <button type="button" class="nextBtn" id="nextBtn">Next</button>
+        </div>
+      </div>
+
+      <div class="question" id="q2c">
+          <p>5. Choose the vibe for the day:</p>
+          <label><input type="radio" name="vibe" value="Chill & Cozy"> Chill & Cozy</label>
+          <label><input type="radio" name="vibe" value="Silly & Fun"> Silly & Fun</label>
+          <label><input type="radio" name="vibe" value="Deep Talk Energy"> Deep Talk Energy</label>
+          <label><input type="radio" name="vibe" value="Flirty Chaos"> Flirty Chaos</label>
+          <div class="nav-buttons">
+          <button type="button" class="backBtn prev" id="prevBtn">く</button>
+          <button type="button" class="nextBtn" id="nextBtn">Next</button>
+        </div>
+      </div>
+
+
+      <div class="question" id="q3"> 
+          <p>3. Please select a city you’re in or want to go to:</p>    
+          <label><input type="radio" name="city" value="Indore"> Indore</label>
+          <label><input type="radio" name="city" value="Jaipur"> Jaipur</label>
+          <label><input type="radio" name="city" value="Delhi"> Delhi</label>
+          <label><input type="radio" name="city" value="Lucknow"> Lucknow</label>
+          <div class="nav-buttons">
+          <button type="button" class="backBtn prev" id="prevBtn">く</button>
+          <button type="button" class="nextBtn" id="nextBtn">Next</button>
+        </div>
+      </div>
+
+      <div class="question" id="q4"> 
+          <p>4. Select a month to meet:</p>   
+          <select name="month">
+              <option>June</option>
+              <option>July</option>
+              <option>August</option>
+              <option>September</option>
+              <option>October</option>
+          </select>
+          <br><br> 
+          <button type="button" class="backBtn prev" id="prevBtn">く</button>
+          <button type="button" id="monthNext">Next</button>
+      </div>
+
+      <div class="question" id="q5">
+        <p>5. On a scale from 1-5, how much did you enjoy this survey?</p>
+        <small>(1 = Creeped out, 5 = Made you smile)</small><br>
+        <div style="display: flex;">
+          <label><input type="radio" name="rating" value="1"> 1</label>
+          <label style="margin-right: 15px;"><input type="radio" name="rating" value="2"> 2</label>
+          <label style="margin-right: 15px;"><input type="radio" name="rating" value="3"> 3</label>
+          <label style="margin-right: 15px;"><input type="radio" name="rating" value="4"> 4</label>
+          <label style="margin-right: 15px;"><input type="radio" name="rating" value="5"> 5</label>
+      </div>
         <div class="nav-buttons">
           <button type="button" class="backBtn prev" id="prevBtn">く</button>
           <button type="button" class="nextBtn" id="nextBtn">Next</button>
+        </div>
       </div>
-    </div>
 
-    <div class="question" id="q2b">
-        <p>4. How long do you like hanging out on first meets?</p>
-        <label><input type="radio" name="duration" value="Quick 30 mins"> Quick 30 mins</label>
-        <label><input type="radio" name="duration" value="1-2 hours"> 1–2 hours</label>
-        <label><input type="radio" name="duration" value="3+ hours"> 3+ hours</label>
-        <label><input type="radio" name="duration" value="Until they kick us out"> Until they kick us out</label>
-        <div class="nav-buttons">
-          <button type="button" class="backBtn prev" id="prevBtn">く</button>
-          <button type="button" class="nextBtn" id="nextBtn">Next</button>
-       </div>
-    </div>
-
-    <div class="question" id="q2c">
-        <p>5. Choose the vibe for the day:</p>
-        <label><input type="radio" name="vibe" value="Chill & Cozy"> Chill & Cozy</label>
-        <label><input type="radio" name="vibe" value="Silly & Fun"> Silly & Fun</label>
-        <label><input type="radio" name="vibe" value="Deep Talk Energy"> Deep Talk Energy</label>
-        <label><input type="radio" name="vibe" value="Flirty Chaos"> Flirty Chaos</label>
-        <div class="nav-buttons">
-        <button type="button" class="backBtn prev" id="prevBtn">く</button>
-        <button type="button" class="nextBtn" id="nextBtn">Next</button>
+      <div class="question" id="q6"> 
+          <p>6. Accept the hangout invitation?</p> 
+          <label><input type="radio" name="accept" value="yes"> Yes</label>
+          <label><input type="radio" name="accept" value="no"> No</label>  
+          <button type="submit" class="nextBtn" id="nextBtn">Let's do this!</button> 
       </div>
-    </div>
 
-
-    <div class="question" id="q3"> 
-        <p>3. Please select a city you’re in or want to go to:</p>    
-        <label><input type="radio" name="city" value="Indore"> Indore</label>
-        <label><input type="radio" name="city" value="Jaipur"> Jaipur</label>
-        <label><input type="radio" name="city" value="Delhi"> Delhi</label>
-        <label><input type="radio" name="city" value="Lucknow"> Lucknow</label>
-        <div class="nav-buttons">
-        <button type="button" class="backBtn prev" id="prevBtn">く</button>
-        <button type="button" class="nextBtn" id="nextBtn">Next</button>
+      <div class="question" id="q7">
+      <p>7. Final step! Drop your email and phone number</p>
+      <label>
+          Email (required):<br>
+          <input type="email" name="email" required style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;" />
+      </label><br><br>
+      <label>
+          Phone (optional, but highly recommended that you share):<br>
+          <input type="tel" name="phone" style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;" />
+      </label><br><br>
+      <button type="submit">Submit</button>
       </div>
-    </div>
+    </form>
 
-    <div class="question" id="q4"> 
-        <p>4. Select a month to meet:</p>   
-        <select name="month">
-            <option>June</option>
-            <option>July</option>
-            <option>August</option>
-            <option>September</option>
-            <option>October</option>
-        </select>
-        <br><br> 
-        <button type="button" class="backBtn prev" id="prevBtn">く</button>
-        <button type="button" id="monthNext">Next</button>
+    <div class="end-message" id="endMsg">
+      <p>Thanks for filling this out! I’ll be waiting patiently at the cat council headquarters 🐾</p>
     </div>
-
-    <div class="question" id="q5">
-      <p>5. On a scale from 1-5, how much did you enjoy this survey?</p>
-      <small>(1 = Creeped out, 5 = Made you smile)</small><br>
-      <div style="display: flex;">
-        <label><input type="radio" name="rating" value="1"> 1</label>
-        <label style="margin-right: 15px;"><input type="radio" name="rating" value="2"> 2</label>
-        <label style="margin-right: 15px;"><input type="radio" name="rating" value="3"> 3</label>
-        <label style="margin-right: 15px;"><input type="radio" name="rating" value="4"> 4</label>
-        <label style="margin-right: 15px;"><input type="radio" name="rating" value="5"> 5</label>
-     </div>
-       <div class="nav-buttons">
-        <button type="button" class="backBtn prev" id="prevBtn">く</button>
-        <button type="button" class="nextBtn" id="nextBtn">Next</button>
-      </div>
-    </div>
-
-    <div class="question" id="q6"> 
-        <p>6. Accept the hangout invitation?</p> 
-        <label><input type="radio" name="accept" value="yes"> Yes</label>
-        <label><input type="radio" name="accept" value="no"> No</label>  
-        <button type="submit" class="nextBtn" id="nextBtn">Let's do this!</button> 
-    </div>
-
-    <div class="question" id="q7">
-    <p>7. Final step! Drop your email and phone number</p>
-    <label>
-        Email (required):<br>
-        <input type="email" name="email" required style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;" />
-    </label><br><br>
-    <label>
-        Phone (optional, but highly recommended that you share):<br>
-        <input type="tel" name="phone" style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;" />
-    </label><br><br>
-    <button type="submit">Submit</button>
-    </div>
-  </form>
-
-  <div class="end-message" id="endMsg">
-    <p>Thanks for filling this out! I’ll be waiting patiently at the cat council headquarters 🐾</p>
   </div>
-</div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const questions = document.querySelectorAll('.question');
-  const answers = {};
-  let currentQuestionIndex = 0;
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const questions = document.querySelectorAll('.question');
+      const answers = {};
+      let currentQuestionIndex = 0;
 
-  const birthdayInput = document.getElementById('birthdayInput');
-  const confirmBirthdayBtn = document.getElementById('confirmBirthdayBtn');
-  const funFact = document.getElementById('funFact');
+      const birthdayInput = document.getElementById('birthdayInput');
+      const confirmBirthdayBtn = document.getElementById('confirmBirthdayBtn');
+      const funFact = document.getElementById('funFact');
 
-  const monthFacts = {
-    0: "January: The Unbothered Overlord. Born tired, lives on caffeine, and thrives in chaos like it’s a spa day.",
-    1: "February: The Mysterious Romantic Disaster. Loves love but ghosts people for sport. Most likely to date a houseplant.",
-    2: "March: The Dreamy Menace. Will start 5 projects, finish none, and blame Mercury retrograde.",
-    3: "April: The Unapologetic Agent of Chaos. Thinks yelling is a love language. It isn’t. We checked.",
-    4: "May: The Aesthetic Tyrant. Will say- I'm chill, while plotting a 32-step revenge plan in cursive.",
-    5: "June: The Charismatic Chaos Cookie. Will throw a party for their plant’s half-birthday but forget their mom’s.",
-    6: "July: The Emotional Royalty. Has a personal vendetta against their 3rd grade teacher. Still.",
-    7: "August: The Glam Dictator. Will start drama at brunch just to “spice things up.”",
-    8: "September: The Overthinking Oracle. Thinks planning a trip is better than the trip. Likes labeling things... especially people.",
-    9: "October: The Spooky Sweetheart with a Dark Side. Will flirt, roast, and hex you—sometimes in the same sentence.",
-    10: "November: The Deep Thinker with Trust Issues. oo honest during game night. Most likely to win Monopoly and lose friends.",
-    11: "December: The Winter Wild Card. Can emotionally detach in 0.2 seconds but will spiral for three weeks over a weird dream."
-  };
-
-  confirmBirthdayBtn.addEventListener('click', () => {
+      birthdayInput.addEventListener('change', () => {
     const date = new Date(birthdayInput.value);
     if (!birthdayInput.value || isNaN(date.getTime())) {
-      alert("Please select your real birthday!");
+      funFact.textContent = '';
       return;
     }
 
-    answers.birthday = birthdayInput.value;
-
     const month = date.getMonth();
-    funFact.textContent = monthFacts[month] || "Fun times ahead!";
+    funFact.textContent = monthFacts[month] || '';
+   });
 
-    showPopup("I am gonna lose it if you entered wrong birthday!", ["Okay"], () => {
-      showNextQuestion();
-    });
-  });
+    const monthFacts = {
+      0: "January: The Unbothered Overlord. Born tired, lives on caffeine, and thrives in chaos like it’s a spa day.",
+      1: "February: The Mysterious Romantic Disaster. Loves love but ghosts people for sport. Most likely to date a houseplant.",
+      2: "March: The Dreamy Menace. Will start 5 projects, finish none, and blame Mercury retrograde.",
+      3: "April: The Unapologetic Agent of Chaos. Thinks yelling is a love language. It isn’t. We checked.",
+      4: "May: The Aesthetic Tyrant. Will say- I'm chill, while plotting a 32-step revenge plan in cursive.",
+      5: "June: The Charismatic Chaos Cookie. Will throw a party for their plant’s half-birthday but forget their mom’s.",
+      6: "July: The Emotional Royalty. Has a personal vendetta against their 3rd grade teacher. Still.",
+      7: "August: The Glam Dictator. Will start drama at brunch just to “spice things up.”",
+      8: "September: The Overthinking Oracle. Thinks planning a trip is better than the trip. Likes labeling things... especially people.",
+      9: "October: The Spooky Sweetheart with a Dark Side. Will flirt, roast, and hex you—sometimes in the same sentence.",
+      10: "November: The Deep Thinker with Trust Issues. oo honest during game night. Most likely to win Monopoly and lose friends.",
+      11: "December: The Winter Wild Card. Can emotionally detach in 0.2 seconds but will spiral for three weeks over a weird dream."
+    };
 
-  // Next and Back Button Logic
-  document.querySelectorAll('.nextBtn').forEach(btn =>
-    btn.addEventListener('click', () => {
-      showNextQuestion();
-    })
-  );
-
-  document.querySelectorAll('.backBtn').forEach(btn =>
-    btn.addEventListener('click', () => {
-      showPreviousQuestion();
-    })
-  );
-
-  function showNextQuestion() {
-    if (currentQuestionIndex < questions.length - 1) {
-      questions[currentQuestionIndex].classList.remove('active');
-      currentQuestionIndex++;
-      questions[currentQuestionIndex].classList.add('active');
-    }
-  }
-
-  function showPreviousQuestion() {
-    if (currentQuestionIndex > 0) {
-      questions[currentQuestionIndex].classList.remove('active');
-      currentQuestionIndex--;
-      questions[currentQuestionIndex].classList.add('active');
-    }
-  }
-  function showPopup(message, buttons, callback) {
-    const popup = document.createElement('div');
-    popup.style.cssText = `
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 280px;
-      transform: translate(-50%, -50%);
-      background: #fffbe6;
-      padding: 1rem;
-      border: 3px solid #f9a825;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      z-index: 9999;
-    `;
-
-    popup.innerHTML = `<p style="margin-bottom:1rem;">${message}</p>`;
-
-    buttons.forEach(text => {
-      const btn = document.createElement('button');
-      btn.textContent = text;
-      btn.style.margin = '0.5rem';
-      btn.onclick = () => {
-        document.body.removeChild(popup);
-        document.body.classList.remove('popup-active');
-        callback(text);
-      };
-      popup.appendChild(btn);
-    });
-
-    document.body.classList.add('popup-active');
-    document.body.appendChild(popup);
-  }
-
-  function showPopupWithImage(message, options, callback, imageSrc) {
-    const popup = document.createElement('div');
-    popup.style.cssText = `
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 290px;
-      transform: translate(-50%, -50%);
-      background: #fff;
-      padding: 1rem;
-      border: 3px solid #f9a825;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      z-index: 9999;
-    `;
-
-    popup.innerHTML = `<p style="margin-bottom:1rem;">${message}</p>`;
-
-    if (imageSrc) {
-      const img = document.createElement('img');
-      img.src = imageSrc;
-      img.className = 'popup-image';
-      img.style.maxWidth = '100%';
-      popup.appendChild(img);
-    }
-
-    options.forEach(text => {
-      const btn = document.createElement('button');
-      btn.textContent = text;
-      btn.style.margin = '0.5rem';
-      btn.onclick = () => {
-        document.body.removeChild(popup);
-        document.body.classList.remove('popup-active');
-        callback(text);
-      };
-      popup.appendChild(btn);
-    });
-
-    document.body.classList.add('popup-active');
-    document.body.appendChild(popup);
-  }
-
-  // ========== Cat Person Logic ==========
-  let catPersonPopupStage = 0;
-  const catPersonPopupChain = [
-    { msg: "Are you sure you don't want to hang out with a cat person?", options: ["Yes, wanna hangout", "No"] },
-    { msg: "You’re really missing out. Have you seen us nap?", options: ["I'm reconsidering", "Still no"] },
-    { msg: "Fine. No head boops for you. Want to rethink that?", options: ["I love head boops", "Nope"] },
-    { msg: "Okay, what about Penguins? You like Penguins, right?", options: ["Penguins?! Yes!", "Meh"] },
-    { msg: "Wow. You're hard to crack. Final offer: cat memes daily?", options: ["Okay fine, YES", "Never!"] },
-    { msg: "We’re just gonna keep this going forever until you agree...", options: ["Alright already", "Keep going"] },
-    { msg: "Alright, if you really wanna miss out on the opportunity then fine!", options: ["Make me happy", "Dil tod do mera"] },
-    { msg: "Forgot to tell you it's a loop XD. Dormamu, I've come to bargain!", options: ["Say Yes", "Stuck in loop forever"] }
-  ];
-
-  function runCatPersonPopupChain() {
-    const popupStep = catPersonPopupChain[catPersonPopupStage % catPersonPopupChain.length];
-    showPopup(popupStep.msg, popupStep.options, (res) => {
-      const response = res.toLowerCase();
-      if (["yes", "okay", "alright", "love", "penguins", "say yes"].some(word => response.includes(word))) {
-        catPersonPopupStage = 0;
-        showNextQuestion();
-      } else {
-        catPersonPopupStage++;
-        runCatPersonPopupChain();
-      }
-    });
-  }
-
-  // ========== Input Handlers ==========
-
-  document.querySelectorAll('input[type="radio"]').forEach(input => {
-    input.addEventListener('change', (e) => {
-      const { name, value } = e.target;
-      answers[name] = value;
-
-      if (name === 'cats' && value === 'no') {
-        showPopupWithImage(
-          "Really? I'm Reporting this to the Cat Council!",
-          ["Report Yourself", "Try Again"],
-          (res) => {
-            if (res === 'Watch This Video') {
-              window.open("https://youtu.be/EBlZOGBDf7E?si=R8nQDSpnuVyM0CQ7", '_blank');
-            } else {
-              document.querySelector('input[name="cats"][value="yes"]').checked = true;
-            }
-            // No auto next
-          },
-          'cat_council.png'
-        );
+    confirmBirthdayBtn.addEventListener('click', () => {
+      const date = new Date(birthdayInput.value);
+      if (!birthdayInput.value || isNaN(date.getTime())) {
+        alert("Please select your real birthday!");
         return;
       }
 
-      if (name === 'cat_person') {
-        if (value === 'no') {
+      answers.birthday = birthdayInput.value;
+
+      const month = date.getMonth();
+      funFact.textContent = monthFacts[month] || "Fun times ahead!";
+
+      showPopup("I am gonna lose it if you entered wrong birthday!", ["Okay"], () => {
+        showNextQuestion();
+      });
+    });
+
+    // Next and Back Button Logic
+    document.querySelectorAll('.nextBtn').forEach(btn =>
+      btn.addEventListener('click', () => {
+        showNextQuestion();
+      })
+    );
+
+    document.querySelectorAll('.backBtn').forEach(btn =>
+      btn.addEventListener('click', () => {
+        showPreviousQuestion();
+      })
+    );
+
+    function showNextQuestion() {
+      if (currentQuestionIndex < questions.length - 1) {
+        questions[currentQuestionIndex].classList.remove('active');
+        currentQuestionIndex++;
+        questions[currentQuestionIndex].classList.add('active');
+      }
+    }
+
+    function showPreviousQuestion() {
+      if (currentQuestionIndex > 0) {
+        questions[currentQuestionIndex].classList.remove('active');
+        currentQuestionIndex--;
+        questions[currentQuestionIndex].classList.add('active');
+      }
+    }
+    function showPopup(message, buttons, callback) {
+      const popup = document.createElement('div');
+      popup.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 280px;
+        transform: translate(-50%, -50%);
+        background: #fffbe6;
+        padding: 1rem;
+        border: 3px solid #f9a825;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        z-index: 9999;
+      `;
+
+      popup.innerHTML = `<p style="margin-bottom:1rem;">${message}</p>`;
+
+      buttons.forEach(text => {
+        const btn = document.createElement('button');
+        btn.textContent = text;
+        btn.style.margin = '0.5rem';
+        btn.onclick = () => {
+          document.body.removeChild(popup);
+          document.body.classList.remove('popup-active');
+          callback(text);
+        };
+        popup.appendChild(btn);
+      });
+
+      document.body.classList.add('popup-active');
+      document.body.appendChild(popup);
+    }
+
+    function showPopupWithImage(message, options, callback, imageSrc) {
+      const popup = document.createElement('div');
+      popup.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 290px;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        padding: 1rem;
+        border: 3px solid #f9a825;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        z-index: 9999;
+      `;
+
+      popup.innerHTML = `<p style="margin-bottom:1rem;">${message}</p>`;
+
+      if (imageSrc) {
+        const img = document.createElement('img');
+        img.src = imageSrc;
+        img.className = 'popup-image';
+        img.style.maxWidth = '100%';
+        popup.appendChild(img);
+      }
+
+      options.forEach(text => {
+        const btn = document.createElement('button');
+        btn.textContent = text;
+        btn.style.margin = '0.5rem';
+        btn.onclick = () => {
+          document.body.removeChild(popup);
+          document.body.classList.remove('popup-active');
+          callback(text);
+        };
+        popup.appendChild(btn);
+      });
+
+      document.body.classList.add('popup-active');
+      document.body.appendChild(popup);
+    }
+
+    // ========== Cat Person Logic ==========
+    let catPersonPopupStage = 0;
+    const catPersonPopupChain = [
+      { msg: "Are you sure you don't want to hang out with a cat person?", options: ["Yes, wanna hangout", "No"] },
+      { msg: "You’re really missing out. Have you seen us nap?", options: ["I'm reconsidering", "Still no"] },
+      { msg: "Fine. No head boops for you. Want to rethink that?", options: ["I love head boops", "Nope"] },
+      { msg: "Okay, what about Penguins? You like Penguins, right?", options: ["Penguins?! Yes!", "Meh"] },
+      { msg: "Wow. You're hard to crack. Final offer: cat memes daily?", options: ["Okay fine, YES", "Never!"] },
+      { msg: "We’re just gonna keep this going forever until you agree...", options: ["Alright already", "Keep going"] },
+      { msg: "Alright, if you really wanna miss out on the opportunity then fine!", options: ["Make me happy", "Dil tod do mera"] },
+      { msg: "Forgot to tell you it's a loop XD. Dormamu, I've come to bargain!", options: ["Say Yes", "Stuck in loop forever"] }
+    ];
+
+    function runCatPersonPopupChain() {
+      const popupStep = catPersonPopupChain[catPersonPopupStage % catPersonPopupChain.length];
+      showPopup(popupStep.msg, popupStep.options, (res) => {
+        const response = res.toLowerCase();
+        if (["yes", "okay", "alright", "love", "penguins", "say yes"].some(word => response.includes(word))) {
           catPersonPopupStage = 0;
-          runCatPersonPopupChain();
-          return;
+          showNextQuestion();
         } else {
-          // No auto next
+          catPersonPopupStage++;
+          runCatPersonPopupChain();
+        }
+      });
+    }
+
+    // ========== Input Handlers ==========
+
+    document.querySelectorAll('input[type="radio"]').forEach(input => {
+      input.addEventListener('change', (e) => {
+        const { name, value } = e.target;
+        answers[name] = value;
+
+        if (name === 'cats' && value === 'no') {
+          showPopupWithImage(
+            "Really? I'm Reporting this to the Cat Council!",
+            ["Report Yourself", "Try Again"],
+            (res) => {
+              if (res === 'Watch This Video') {
+                window.open("https://youtu.be/EBlZOGBDf7E?si=R8nQDSpnuVyM0CQ7", '_blank');
+              } else {
+                document.querySelector('input[name="cats"][value="yes"]').checked = true;
+              }
+              // No auto next
+            },
+            'cat_council.png'
+          );
           return;
         }
-      }
 
-      // No auto next here either
-    });
-  });
+        if (name === 'cat_person') {
+          if (value === 'no') {
+            catPersonPopupStage = 0;
+            runCatPersonPopupChain();
+            return;
+          } else {
+            // No auto next
+            return;
+          }
+        }
 
-  // ========== Manual Navigation ==========
-  document.getElementById('monthNext')?.addEventListener('click', showNextQuestion);
-
-  // ========== Form Submission ==========
-  document.getElementById('dateForm')?.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    formData.forEach((value, key) => {
-      answers[key] = value;
-    });
-
-    emailjs.send("service_mvvn9am", "template_ek8dj7v", answers)
-      .then((response) => {
-        console.log("SUCCESS!", response.status, response.text);
-        document.getElementById('dateForm').style.display = 'none';
-        document.getElementById('endMsg').style.display = 'block';
-      })
-      .catch((error) => {
-        console.error("FAILED...", error);
-        alert("Oops! Something went wrong while sending.");
+        // No auto next here either
       });
+    });
+
+    // ========== Manual Navigation ==========
+    document.getElementById('monthNext')?.addEventListener('click', showNextQuestion);
+
+    // ========== Form Submission ==========
+    document.getElementById('dateForm')?.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      formData.forEach((value, key) => {
+        answers[key] = value;
+      });
+
+      emailjs.send("service_mvvn9am", "template_ek8dj7v", answers)
+        .then((response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          document.getElementById('dateForm').style.display = 'none';
+          document.getElementById('endMsg').style.display = 'block';
+        })
+        .catch((error) => {
+          console.error("FAILED...", error);
+          alert("Oops! Something went wrong while sending.");
+        });
+    });
   });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const questions = document.querySelectorAll('.question');
+  </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const questions = document.querySelectorAll('.question');
 
-  questions.forEach((question) => {
-    const nextBtn = question.querySelector('.nextBtn');
-    if (nextBtn) {
-      nextBtn.disabled = true;
+    questions.forEach((question) => {
+      const nextBtn = question.querySelector('.nextBtn');
+      if (nextBtn) {
+        nextBtn.disabled = true;
 
-      const radios = question.querySelectorAll('input[type="radio"]');
-      if (radios.length > 0) {
-        radios.forEach(radio => {
-          radio.addEventListener('change', () => {
-            nextBtn.disabled = false;
+        const radios = question.querySelectorAll('input[type="radio"]');
+        if (radios.length > 0) {
+          radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+              nextBtn.disabled = false;
+            });
           });
-        });
-      }
+        }
 
-      // Optional: Disable again when user goes back
-      const backBtn = question.querySelector('.backBtn');
-      if (backBtn) {
-        backBtn.addEventListener('click', () => {
-          nextBtn.disabled = true;
-        });
+        // Optional: Disable again when user goes back
+        const backBtn = question.querySelector('.backBtn');
+        if (backBtn) {
+          backBtn.addEventListener('click', () => {
+            nextBtn.disabled = true;
+          });
+        }
       }
+    });
+
+    // Special handling for dropdown month question
+    const monthSelect = document.querySelector('select[name="month"]');
+    const monthNextBtn = document.getElementById('monthNext');
+    if (monthSelect && monthNextBtn) {
+      monthNextBtn.disabled = true;
+      monthSelect.addEventListener('change', () => {
+        monthNextBtn.disabled = false;
+      });
     }
   });
 
-  // Special handling for dropdown month question
-  const monthSelect = document.querySelector('select[name="month"]');
-  const monthNextBtn = document.getElementById('monthNext');
-  if (monthSelect && monthNextBtn) {
-    monthNextBtn.disabled = true;
-    monthSelect.addEventListener('change', () => {
-      monthNextBtn.disabled = false;
-    });
-  }
-});
+  // Handle all next buttons disabling until an option is selected
+  document.querySelectorAll('.question').forEach(question => {
+    const nextBtn = question.querySelector('.nextBtn');
+    const radios = question.querySelectorAll('input[type="radio"]');
 
-// Handle all next buttons disabling until an option is selected
-document.querySelectorAll('.question').forEach(question => {
-  const nextBtn = question.querySelector('.nextBtn');
-  const radios = question.querySelectorAll('input[type="radio"]');
+    if (radios.length > 0 && nextBtn) {
+      nextBtn.disabled = true;
 
-  if (radios.length > 0 && nextBtn) {
-    nextBtn.disabled = true;
+      const warning = document.createElement('div');
+      warning.style.color = 'red';
+      warning.style.fontSize = '0.75rem';
+      warning.style.marginTop = '0.3rem';
+      warning.textContent = 'Please choose an option';
+      warning.style.display = 'none';
+      question.appendChild(warning);
 
-    const warning = document.createElement('div');
-    warning.style.color = 'red';
-    warning.style.fontSize = '0.75rem';
-    warning.style.marginTop = '0.3rem';
-    warning.textContent = 'Please choose an option';
-    warning.style.display = 'none';
-    question.appendChild(warning);
-
-    radios.forEach(radio => {
-      radio.addEventListener('change', () => {
-        nextBtn.disabled = false;
-        warning.style.display = 'none';
+      radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+          nextBtn.disabled = false;
+          warning.style.display = 'none';
+        });
       });
-    });
 
-    nextBtn.addEventListener('click', () => {
-      const isChecked = Array.from(radios).some(r => r.checked);
-      if (!isChecked) {
-        warning.style.display = 'block';
-        nextBtn.disabled = true;
-      }
-    });
-  }
-});
+      nextBtn.addEventListener('click', () => {
+        const isChecked = Array.from(radios).some(r => r.checked);
+        if (!isChecked) {
+          warning.style.display = 'block';
+          nextBtn.disabled = true;
+        }
+      });
+    }
+  });
 
-</script>
-</body>
-</html>
+  </script>
+  </body>
+  </html>
